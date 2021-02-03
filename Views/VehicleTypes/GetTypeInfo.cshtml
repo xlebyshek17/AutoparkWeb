@@ -1,0 +1,33 @@
+﻿@model AutoparkWeb.Models.Entity.VehicleType
+@{
+    ViewData["Title"] = "Type SpareParts";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="GetTypeInfo" asp-controller="VehicleTypes">
+    <table class="table table-bordered">
+        <caption>Vehicle SpareParts</caption>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type Name</th>
+                <th scope="col">Tax Coefficient</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.TypeName</td>
+                <td>@Model.TaxCoefficient</td>
+                <td class="align-content-xl-center">
+                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="EditType" asp-route-id="@Model.Id">Update</a>
+                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="DeleteType" asp-route-id="@Model.Id">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<div>
+    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="ViewVehicleTypes">Back to list of types</a>
+</div>

@@ -1,0 +1,54 @@
+﻿@model AutoparkWeb.Models.Entity.Vehicle
+@{
+    ViewData["Title"] = "Vehicle SpareParts";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="GetVehicleInfo" asp-controller="Vehicle">
+    <table class="table table-bordered">
+        <caption>Vehicle SpareParts</caption>
+        <thead class="thead-dark" >
+            <tr>
+                <th scope="col"><p class="text-center">Type</p></th>
+                <th scope="col"><p class="text-center">ModelName</p></th>
+                <th scope="col"><p class="text-center">Number</p></th>
+                <th scope="col"><p class="text-center">Weight(kg)</p></th>
+                <th scope="col"><p class="text-center">Year</p></th>
+                <th scope="col"><p class="text-center">Mileage(km)</p></th>
+                <th scope="col"><p class="text-center">TankVolume</p></th>
+                <th scope="col"><p class="text-center">Color</p></th>
+                <th scope="col"><p class="text-center">Engine</p></th>
+                <th scope="col"><p class="text-center">Road tax per month($)</p></th>
+                <th scope="col"><p class="text-center">Mileage on a full tank(km)</p></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.GetTypeById(Model.Type).TypeName</td>
+                <td>@Model.ModelName</td>
+                <td>@Model.RegistrationNumber</td>
+                <td>@Model.Weight</td>
+                <td>@Model.ManufactureYear</td>
+                <td>@Model.Mileage</td>
+                <td>@Model.TankVolume</td>
+                <td>@Model.Color</td>
+                <td>@Model.Engine</td>
+                <td>@Model.GetCalcTaxPerMonth().ToString("0.00")</td>
+                <td>@Model.GetMileageWithFullTank()</td>
+                <td>
+                    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a>
+                    
+                </td>
+                <td>
+                    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<div>
+    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="ViewVehicles">Back to list of vehicles</a>
+</div>
