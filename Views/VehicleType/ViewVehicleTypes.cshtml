@@ -13,7 +13,7 @@
 </nav>
 <div>
     <p>
-        <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="CreateType">Add type</a>
+        <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="CreateType">Add type</a>
     </p>
 </div>
 
@@ -35,12 +35,12 @@
                 <tr>
                     <td>@item.Id</td>
                     <td>
-                        <a asp-controller="VehicleTypes" asp-action="GetTypeInfo" asp-route-id="@item.Id">@item.TypeName</a>
+                        <a asp-controller="VehicleType" asp-action="GetTypeInfo" asp-route-id="@item.Id">@item.TypeName</a>
                     </td>
                     <td>@item.TaxCoefficient</td>
                     <td>
-                        <a asp-controller="VehicleTypes" asp-action="EditType" asp-route-id="@item.Id">Update</a>    |   
-                        <a asp-controller="VehicleTypes" asp-action="DeleteType" asp-route-id="@item.Id">Delete</a>
+                        <a asp-controller="VehicleType" asp-action="EditType" asp-route-id="@item.Id">Update</a>    |   
+                        <a asp-controller="VehicleType" asp-action="DeleteType" asp-route-id="@item.Id">Delete</a>
                     </td>
                 </tr>
             }

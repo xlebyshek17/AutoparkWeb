@@ -1,5 +1,4 @@
-﻿@model IEnumerable<AutoparkWeb.Models.Entity.Vehicle>
-@{
+﻿@{
     ViewData["Title"] = "Welcome";
 }
 <h2>@ViewData["Title"]</h2>
@@ -7,7 +6,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Vehicle" asp-action="ViewVehicles">Vehicles</a></li>
-        <li class="breadcrumb-item"><a asp-controller="VehicleTypes" asp-action="ViewVehicleTypes">VehicleTypes</a></li>
+        <li class="breadcrumb-item"><a asp-controller="VehicleType" asp-action="ViewVehicleTypes">VehicleTypes</a></li>
         <li class="breadcrumb-item"><a asp-controller="SpareParts" asp-action="ViewSpareParts">SpareParts</a></li>
         <li class="breadcrumb-item"><a href="#">Orders</a></li>
     </ol>

@@ -4,7 +4,7 @@
 }
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="GetTypeInfo" asp-controller="VehicleTypes">
+<form asp-action="GetTypeInfo" asp-controller="VehicleType">
     <table class="table table-bordered">
         <caption>Vehicle SpareParts</caption>
         <thead class="thead-dark">
@@ -20,8 +20,8 @@
                 <td>@Model.TypeName</td>
                 <td>@Model.TaxCoefficient</td>
                 <td class="align-content-xl-center">
-                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="EditType" asp-route-id="@Model.Id">Update</a>
-                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="DeleteType" asp-route-id="@Model.Id">Delete</a>
+                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="EditType" asp-route-id="@Model.Id">Update</a>
+                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="DeleteType" asp-route-id="@Model.Id">Delete</a>
                 </td>
             </tr>
         </tbody>
@@ -29,5 +29,5 @@
 </form>
 
 <div>
-    <a class="btn btn-outline-info" role="button" asp-controller="VehicleTypes" asp-action="ViewVehicleTypes">Back to list of types</a>
+    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="ViewVehicleTypes">Back to list of types</a>
 </div>
