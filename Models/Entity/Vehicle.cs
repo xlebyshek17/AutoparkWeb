@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using AutoparkWeb.Models.Repositories;
 using Microsoft.Extensions.Configuration;
 using AutoparkWeb.Models.Entity.Engine;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 
 namespace AutoparkWeb.Models.Entity
 {
-    public class Vehicle //: IComparable<Vehicle>
+    public class Vehicle//: IComparable<Vehicle>
     {
         public int Id { get; set; }
         public int Type { get; set; }
@@ -71,6 +74,7 @@ namespace AutoparkWeb.Models.Entity
         {
             string connStr = "Data Source=DESKTOP-I8MCTFK\\SQLEXPRESS;Initial Catalog=AutoPark;Integrated Security=True";
             VehicleTypeRepository type = new VehicleTypeRepository(connStr);
+           
             return type.Get(id);
         }
 

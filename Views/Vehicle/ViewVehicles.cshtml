@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AutoparkWeb.Models.Entity.Vehicle>
+@inject AutoparkWeb.Models.Repositories.IRepository<VehicleType> type
 @{
     ViewData["Title"] = "Vehicles";
 }
@@ -37,24 +38,24 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.GetTypeById(item.Type).TypeName</td>
-                <td>
-                    <a asp-controller="Vehicle" asp-action="GetVehicleInfo" asp-route-id="@item.Id">@item.ModelName</a>
-                </td>
-                <td>@item.RegistrationNumber</td>
-                <td>@item.Weight</td>
-                <td>@item.ManufactureYear</td>
-                <td>@item.Mileage</td>
-                <td>@item.TankVolume</td>
-                <td>@item.Color</td>
-                <td>@item.Engine</td>
-                <td>
-                    <a asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@item.Id">Update</a> |
-                    <a asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+         {
+        <tr>
+            <td>@type.GetList().Where(t => t.Id ==  item.Type).FirstOrDefault().TypeName</td>
+            <td>
+                <a asp-controller="Vehicle" asp-action="GetVehicleInfo" asp-route-id="@item.Id">@item.ModelName</a>
+            </td>
+            <td>@item.RegistrationNumber</td>
+            <td>@item.Weight</td>
+            <td>@item.ManufactureYear</td>
+            <td>@item.Mileage</td>
+            <td>@item.TankVolume</td>
+            <td>@item.Color</td>
+            <td>@item.Engine</td>
+            <td>
+                <a asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@item.Id">Update</a> |
+                <a asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
