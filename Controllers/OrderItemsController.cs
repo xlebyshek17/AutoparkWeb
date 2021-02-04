@@ -17,9 +17,9 @@ namespace AutoparkWeb.Controllers
             repo = (OrderItemsRepository)r;
         }
 
-        public IActionResult ViewOrderItems()
+        public IActionResult ViewOrderItems(int id)
         {
-            return View(repo.GetList());
+            return View(repo.Get(id)) ?? (IActionResult)NotFound();
         }
 
         public IActionResult CreateOrderItems()
@@ -31,7 +31,7 @@ namespace AutoparkWeb.Controllers
         public IActionResult CreateOrderItems(OrderItems order)
         {
             repo.Create(order);
-            return RedirectToAction("ViewOrderItems");
+            return Redirect("~/Orders/ViewOrders");
         }
     }
 }

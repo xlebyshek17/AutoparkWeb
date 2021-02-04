@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<AutoparkWeb.Models.Entity.Orders>
 @inject AutoparkWeb.Models.Repositories.IRepository<Vehicle> vehicle
+@inject AutoparkWeb.Models.Repositories.IRepository<OrderItems> order
+@inject AutoparkWeb.Models.Repositories.IRepository<SpareParts> part
 @{
     ViewData["Title"] = "Orders";
 }
@@ -22,8 +24,8 @@
                     <caption>List of Orders</caption>
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Vehicle</th>
+                            <th scope="col" class="text-center">Id</th>
+                            <th scope="col" class="text-center">Vehicle</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -45,9 +47,34 @@
     <div class="col-sm-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">OrderItems</h5>
+                <table class="table table-bordered table-hover table-sm table align-middle">
+                    <caption>List of order items</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-center">Id</th>
+                            <th scope="col" class="text-center">Vehicle</th>
+                            <th scope="col" class="text-center">SparePart</th>
+                            <th scope="col" class="text-center">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var o in order.GetList())
+                        {
+                        <tr>
+                            <td align="center">
+                                <a asp-controller="OrderItems" asp-action="ViewOrderItems" asp-route-id="@o.Id">@o.Id</a>
+                            </td>
+                            @{int id = Model.ToList().Where(ord => ord.Id == o.OrderId).FirstOrDefault().VehicleId;}
+                            <td align="center">@vehicle.GetList().Where(v => v.Id == id).FirstOrDefault().ModelName</td>
+                            @*<td align="center">@o.OrderId</td>*@
+                            <td align="center">@part.GetList().Where(p => p.Id == o.DetailId).FirstOrDefault().Name</td>
+                            <td align="center">@o.DetailCount</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-controller="OrderItems" asp-action="CreateOrderItems" class="btn btn-outline-info">Create OrderItems</a>
             </div>
         </div>
     </div>
