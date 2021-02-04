@@ -23,8 +23,6 @@
                 <th scope="col"><p class="text-center">Engine</p></th>
                 <th scope="col"><p class="text-center">Tax per month</p></th>
                 <th scope="col"><p class="text-center">Mileage on a full tank</p></th>
-                <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -40,17 +38,16 @@
                 <td>@Model.Engine</td>
                 <td>@Model.GetCalcTaxPerMonth().ToString("0.00") $</td>
                 <td>@Model.GetMileageWithFullTank() km</td>
-                <td>
-                    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a>
 
-                </td>
-                <td>
-                    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a>
-                </td>
             </tr>
         </tbody>
     </table>
 </form>
+
+<div>
+    <p><a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a></p>
+    <p><a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a></p>
+</div>
 
 <div>
     <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="ViewVehicles">Back to list of vehicles</a>

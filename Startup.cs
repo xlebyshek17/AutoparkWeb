@@ -1,3 +1,4 @@
+using AutoparkWeb.Models;
 using AutoparkWeb.Models.Entity;
 using AutoparkWeb.Models.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,7 @@ namespace AutoparkWeb
             services.AddTransient<IRepository<SpareParts>, SparePartsRepository>(provider => new SparePartsRepository(connectionString));
             services.AddTransient<IRepository<Orders>, OrdersRepository>(provider => new OrdersRepository(connectionString));
             services.AddTransient<IRepository<OrderItems>, OrderItemsRepository>(provider => new OrderItemsRepository(connectionString));
+            services.AddTransient<OrdersContext>(p => new OrdersContext(connectionString));
             services.AddControllersWithViews();
         }
 

@@ -25,26 +25,6 @@ namespace AutoparkWeb.Models.Entity
         public string Color { get; set; }
         public string Engine { get; set; }
 
-        /*public Vehicle()
-        {
-
-        }
-
-        public Vehicle(int id, int type, string modelName, string registrationNumber, double weight,
-                int manufactureYear, double mileage, double tankVolume, string color, string engine)
-        {
-            Id = id;
-            Type = type;
-            ModelName = modelName;
-            RegistrationNumber = registrationNumber;
-            Weight = weight;
-            ManufactureYear = manufactureYear;
-            Mileage = mileage;
-            TankVolume = tankVolume;
-            Color = color;
-            Engine = engine;
-        }*/
-
         public double GetCalcTaxPerMonth()
         {
             return (Weight * 0.0013) + (GetEngineByName(Enum.Parse<EngineNames>(Engine)).EngineTaxCoefficient * GetTypeById(Type).TaxCoefficient * 30) + 5;
@@ -77,11 +57,6 @@ namespace AutoparkWeb.Models.Entity
            
             return type.Get(id);
         }
-
-        /*private int SetTypeByName(string typeName)
-        {
-            return type.GetByName(typeName).Id;
-        }*/
 
         /*public override string ToString()
         {

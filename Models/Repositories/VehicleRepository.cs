@@ -29,7 +29,7 @@ namespace AutoparkWeb.Models.Repositories
                                $"@ManufactureYear, " +
                                $"@Mileage," +
                                $"@TankVolume, " +
-                               $"@Color', " +
+                               $"@Color, " +
                                $"@Engine)";
 
                 db.Execute(sqlQuery, vehicle);
