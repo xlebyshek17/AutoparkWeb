@@ -35,7 +35,7 @@
                             <tr>
                                 <td align="center">@item.Id</td>
                                 <td align="center">@vehicle.GetList().Where(v => v.Id == item.VehicleId).FirstOrDefault().ModelName</td>
-                                <td align="center"><a asp-controller="Orders" asp-action="GetOrderInfo" class="btn btn-outline-info">Information</a></td>
+                                <td align="center"><a asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@item.Id" class="btn btn-outline-info">Information</a></td>
                             </tr>
                         }
                     </tbody>

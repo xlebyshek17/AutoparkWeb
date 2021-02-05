@@ -33,5 +33,10 @@ namespace AutoparkWeb.Controllers
             repo.Create(order);
             return RedirectToAction("ViewOrders");
         }
+
+        public IActionResult GetOrderInfo(int id)
+        {
+            return View(repo.Get(id));
+        }
     }
 }
