@@ -79,5 +79,32 @@ namespace AutoparkWeb.Models.Repositories
                 db.Execute(sqlQuery, vehicle);
             }
         }
+
+        public List<Vehicle> OrderByModelName()
+        {
+            using (IDbConnection db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Vehicle>($"Select * from Vehicles order by ModelName").ToList();
+            }
+        }
+
+        public List<Vehicle> OrderByMileage()
+        {
+            using (IDbConnection db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Vehicle>($"Select * from Vehicles order by Mileage").ToList();
+            }
+        }
+
+        public List<Vehicle> OrderByType()
+        {
+            using (IDbConnection db = new SqlConnection(ConnectionString))
+            {
+                return db.Query<Vehicle>($"Select * from Vehicles v " +
+                                         $"join VehicleTypes t " +
+                                         $"on v.Type = t.Id " +
+                                         $"order by t.TypeName").ToList();
+            }
+        }
     }
 }

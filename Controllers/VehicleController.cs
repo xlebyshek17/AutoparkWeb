@@ -1,25 +1,42 @@
 ﻿using AutoparkWeb.Models.Entity;
 using AutoparkWeb.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoparkWeb.Controllers
 {
     public class VehicleController : Controller
     {
-        private readonly VehicleRepository repos;
+        private VehicleRepository repos;
 
         public VehicleController(IRepository<Vehicle> r)
         {
             repos = (VehicleRepository)r;
         }
 
-        public IActionResult ViewVehicles()
+        public IActionResult ViewVehicles(SortState sortOrder = SortState.DefaultByID)
         {
-            return View(repos.GetList());
+            ViewData["ModelName"] = sortOrder == SortState.ModelNameAsc ? SortState.ModelNameDesc : SortState.ModelNameAsc;
+            ViewData["Mileage"] = sortOrder == SortState.MileageAsc ? SortState.MileageDesc : SortState.MileageAsc;
+            ViewData["TypeName"] = sortOrder == SortState.TypeNameAsc ? SortState.TypeNameDesc : SortState.TypeNameAsc;
+
+            switch(sortOrder)
+            {
+                case SortState.ModelNameAsc:
+                    return View(repos.GetList().OrderBy(v => v.ModelName));
+                case SortState.ModelNameDesc:
+                    return View(repos.GetList().OrderByDescending(v => v.ModelName));
+                case SortState.MileageAsc:
+                    return View(repos.GetList().OrderBy(v => v.Mileage));
+                case SortState.MileageDesc:
+                    return View(repos.GetList().OrderByDescending(v => v.Mileage));
+                /*case SortState.TypeNameAsc:
+                    return View(repos.GetList().OrderBy(v => v.VehicleType.TypeName));
+                case SortState.TypeNameDesc:
+                    return View(repos.GetList().OrderByDescending(v => v.VehicleType.TypeName));*/
+                default:
+                    return View(repos.GetList().OrderBy(v => v.Id));
+            }
         }
 
         public IActionResult CreateVehicle()

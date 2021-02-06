@@ -24,12 +24,13 @@
     <caption>List of vehicles</caption>
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Type</th>
-            <th scope="col">ModelName</th>
+            <th scope="col">Id</th>
+            <th scope="col"><a asp-controller="Vehicle" asp-action="ViewVehicles" asp-route-sortOrder="@ViewBag.TypeName">Type</a></th>
+            <th><a asp-controller="Vehicle" asp-action="ViewVehicles" asp-route-sortOrder="@ViewBag.ModelName">ModelName</a></th>
             <th scope="col">Number</th>
             <th scope="col">Weight</th>
             <th scope="col">Year</th>
-            <th scope="col">Mileage</th>
+            <th><a asp-controller="Vehicle" asp-action="ViewVehicles" asp-route-sortOrder="@ViewBag.Mileage">Mileage</a></th>
             <th scope="col">TankVolume</th>
             <th scope="col">Color</th>
             <th scope="col">Engine</th>
@@ -38,12 +39,11 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-         {
+        {
         <tr>
-            <td>@type.GetList().Where(t => t.Id ==  item.Type).FirstOrDefault().TypeName</td>
-            <td>
-                <a asp-controller="Vehicle" asp-action="GetVehicleInfo" asp-route-id="@item.Id">@item.ModelName</a>
-            </td>
+            <td><a asp-controller="Vehicle" asp-action="GetVehicleInfo" asp-route-id="@item.Id">@item.Id</a></td>
+            <td>@type.GetList().Where(t => t.Id == item.Type).FirstOrDefault().TypeName</td>
+            <td>@item.ModelName</td>
             <td>@item.RegistrationNumber</td>
             <td>@item.Weight</td>
             <td>@item.ManufactureYear</td>

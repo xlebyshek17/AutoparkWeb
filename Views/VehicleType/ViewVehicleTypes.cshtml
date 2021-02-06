@@ -31,12 +31,9 @@
         <tbody>
             @foreach (var item in Model)
             {
-
                 <tr>
                     <td>@item.Id</td>
-                    <td>
-                        <a asp-controller="VehicleType" asp-action="GetTypeInfo" asp-route-id="@item.Id">@item.TypeName</a>
-                    </td>
+                    <td>@item.TypeName</td>
                     <td>@item.TaxCoefficient</td>
                     <td>
                         <a asp-controller="VehicleType" asp-action="EditType" asp-route-id="@item.Id">Update</a>    |   

@@ -24,6 +24,7 @@ namespace AutoparkWeb.Models.Entity
         public double TankVolume { get; set; }
         public string Color { get; set; }
         public string Engine { get; set; }
+        public VehicleType VehicleType { get; set; }
 
         public double GetCalcTaxPerMonth()
         {

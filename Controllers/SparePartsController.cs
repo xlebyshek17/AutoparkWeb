@@ -49,7 +49,7 @@ namespace AutoparkWeb.Controllers
         }
 
         [HttpGet]
-        [ActionName("DeleteDetail")]
+        [ActionName("DeleteSparePart")]
         public IActionResult ConfirmSparePartDelete(int id)
         {
             SpareParts detail = repo.Get(id);
