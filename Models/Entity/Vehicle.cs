@@ -24,7 +24,6 @@ namespace AutoparkWeb.Models.Entity
         public double TankVolume { get; set; }
         public string Color { get; set; }
         public string Engine { get; set; }
-        public VehicleType VehicleType { get; set; }
 
         public double GetCalcTaxPerMonth()
         {
@@ -58,38 +57,5 @@ namespace AutoparkWeb.Models.Entity
            
             return type.Get(id);
         }
-
-        /*public override string ToString()
-        {
-            return $"{Id}, {Type}, {ModelName}, {RegistrationNumber}, {Weight}, {ManufactureYear}, " +
-                   $"{Mileage}, {TankVolume}, {Color}, {Type.TaxCoefficient}";
-        }
-
-        public int CompareTo(Vehicle secondVehicle)
-        {
-            if (secondVehicle != null)
-            {
-                return GetCalcTaxPerMonth().CompareTo(secondVehicle.GetCalcTaxPerMonth());
-            }
-            else
-                throw new Exception("It is not possible to compare two objects");
-        }
-
-        public override bool Equals(object obj)
-        {
-            Vehicle vehicle = (Vehicle)obj;
-
-            if (vehicle != null)
-            {
-                return Type.Equals(vehicle.Type) && ModelName.Equals(vehicle.ModelName);
-            }
-            else
-                throw new Exception("It is not possible to compare two objects");
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }*/
     }
 }
