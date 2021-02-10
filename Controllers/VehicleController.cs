@@ -23,19 +23,19 @@ namespace AutoparkWeb.Controllers
             switch(sortOrder)
             {
                 case SortState.ModelNameAsc:
-                    return View(repos.GetList().OrderBy(v => v.ModelName));
-                case SortState.ModelNameDesc:
-                    return View(repos.GetList().OrderByDescending(v => v.ModelName));
-                case SortState.MileageAsc:
-                    return View(repos.GetList().OrderBy(v => v.Mileage));
-                case SortState.MileageDesc:
-                    return View(repos.GetList().OrderByDescending(v => v.Mileage));
-                case SortState.TypeNameAsc:
-                    return View(repos.GetList().OrderBy(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
-                case SortState.TypeNameDesc:
-                    return View(repos.GetList().OrderByDescending(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
-                default:
-                    return View(repos.GetList().OrderBy(v => v.Id));
+                     return View(repos.GetList().OrderBy(v => v.ModelName));
+                 case SortState.ModelNameDesc:
+                     return View(repos.GetList().OrderByDescending(v => v.ModelName));
+                 case SortState.MileageAsc:
+                     return View(repos.GetList().OrderBy(v => v.Mileage));
+                 case SortState.MileageDesc:
+                     return View(repos.GetList().OrderByDescending(v => v.Mileage));
+                 case SortState.TypeNameAsc:
+                     return View(repos.GetList().OrderBy(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
+                 case SortState.TypeNameDesc:
+                     return View(repos.GetList().OrderByDescending(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
+                 default:
+                     return View(repos.GetList().OrderBy(v => v.Id));
             }
         }
 

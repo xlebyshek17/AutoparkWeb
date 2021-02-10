@@ -25,6 +25,8 @@ namespace AutoparkWeb.Models.Entity
         public string Color { get; set; }
         public string Engine { get; set; }
 
+        public VehicleType VType { get; set; }
+
         public double GetCalcTaxPerMonth()
         {
             return (Weight * 0.0013) + (GetEngineByName(Enum.Parse<EngineNames>(Engine)).EngineTaxCoefficient * GetTypeById(Type).TaxCoefficient * 30) + 5;

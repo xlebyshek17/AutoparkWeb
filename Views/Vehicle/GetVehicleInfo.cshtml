@@ -12,6 +12,7 @@
         <caption>Vehicle Details</caption>
         <thead class="thead-dark">
             <tr>
+                <th scope="col"><p class="text-center">ID</p></th>
                 <th scope="col"><p class="text-center">Type</p></th>
                 <th scope="col"><p class="text-center">Model</p></th>
                 <th scope="col"><p class="text-center">Number</p></th>
@@ -27,6 +28,7 @@
         </thead>
         <tbody>
             <tr>
+                <td>@Model.Id</td>
                 <td>@type.GetList().Where(t => t.Id ==  Model.Type).FirstOrDefault().TypeName</td>
                 <td>@Model.ModelName</td>
                 <td>@Model.RegistrationNumber</td>
@@ -37,18 +39,18 @@
                 <td>@Model.Color</td>
                 <td>@Model.Engine</td>
                 <td>@Model.GetCalcTaxPerMonth().ToString("0.00") $</td>
-                <td>@Model.GetMileageWithFullTank() km</td>
+                <td>@Model.GetMileageWithFullTank().ToString("0.00") km</td>
 
             </tr>
         </tbody>
     </table>
 </form>
 
-<div>
-    <p><a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a></p>
-    <p><a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a></p>
-</div>
+@*<div>
+    <p><a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a></p>
+    <p><a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a></p>
+</div>*@
 
 <div>
-    <a class="btn btn-outline-info" role="button" asp-controller="Vehicle" asp-action="ViewVehicles">Back to list of vehicles</a>
+    <a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="ViewVehicles">Back to list of vehicles</a>
 </div>

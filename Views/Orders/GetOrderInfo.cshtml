@@ -11,7 +11,8 @@
 </div>
 <div class="card text-center">
     <div class="card-header">
-        <h4>Order #@Model.Id</h4>
+        @{ var name = vehicle.GetList().Where(v => v.Id == Model.VehicleId).FirstOrDefault().ModelName;}
+        <h4>Order #@Model.Id (@name)</h4>
     </div>
     <div class="card-body">
         @foreach (var ord in orders.GetList())
@@ -20,14 +21,13 @@
             {
                 <blockquote class="blockquote">
                     <dl class="row">
-                        <dt class="col-sm-2">Id</dt>
-                        <dd class="col-sm-10">@Model.Id</dd>
+                        @*<dt class="col-sm-2">Id</dt>
+                        <dd class="col-sm-10">@Model.Id</dd>*@
+                        @*<dt class="col-sm-2">Vehicle</dt>
+                        <dd class="col-sm-10">@vehicle.GetList().Where(v => v.Id == Model.VehicleId).FirstOrDefault().ModelName</dd>*@
 
                         <dt class="col-sm-2">OrderItemsId</dt>
                         <dd class="col-sm-10">@ord.Id</dd>
-
-                        <dt class="col-sm-2">Vehicle</dt>
-                        <dd class="col-sm-10">@vehicle.GetList().Where(v => v.Id == Model.VehicleId).FirstOrDefault().ModelName</dd>
 
                         <dt class="col-sm-2">Spare part</dt>
                         <dd class="col-sm-10">@part.GetList().Where(p => p.Id == ord.DetailId).FirstOrDefault().Name</dd>

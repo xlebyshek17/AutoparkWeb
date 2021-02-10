@@ -53,8 +53,8 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="text-center">Id</th>
-                            <th scope="col" class="text-center">Vehicle</th>
-                            <th scope="col" class="text-center">SparePart</th>
+                            <th scope="col" class="text-center">OrderID</th>
+                            <th scope="col" class="text-center">SparePartID</th>
                             <th scope="col" class="text-center">Count</th>
                         </tr>
                     </thead>
@@ -65,10 +65,11 @@
                             <td align="center">
                                 <a asp-controller="OrderItems" asp-action="ViewOrderItems" asp-route-id="@o.Id">@o.Id</a>
                             </td>
-                            @{int id = Model.ToList().Where(ord => ord.Id == o.OrderId).FirstOrDefault().VehicleId;}
+                            @*@{int id = Model.ToList().Where(ord => ord.Id == o.OrderId).FirstOrDefault().VehicleId;}
                             <td align="center">@vehicle.GetList().Where(v => v.Id == id).FirstOrDefault().ModelName</td>
-                            @*<td align="center">@o.OrderId</td>*@
-                            <td align="center">@part.GetList().Where(p => p.Id == o.DetailId).FirstOrDefault().Name</td>
+                            <td align="center">@part.GetList().Where(p => p.Id == o.DetailId).FirstOrDefault().Name</td>*@
+                            <td align="center">@o.OrderId</td>
+                            <td align="center">@o.DetailId</td>
                             <td align="center">@o.DetailCount</td>
                         </tr>
                         }

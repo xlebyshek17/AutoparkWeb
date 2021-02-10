@@ -20,14 +20,13 @@
                 <td>@Model.TypeName</td>
                 <td>@Model.TaxCoefficient</td>
                 <td class="align-content-xl-center">
-                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="EditType" asp-route-id="@Model.Id">Update</a>
-                    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="DeleteType" asp-route-id="@Model.Id">Delete</a>
+                    <a class="btn btn-outline-info btn-block" role="button" asp-controller="VehicleType" asp-action="EditType" asp-route-id="@Model.Id">Update</a>
+                    <a class="btn btn-outline-info btn-block" role="button" asp-controller="VehicleType" asp-action="DeleteType" asp-route-id="@Model.Id">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </form>
-
 <div>
-    <a class="btn btn-outline-info" role="button" asp-controller="VehicleType" asp-action="ViewVehicleTypes">Back to list of types</a>
+    <a class="btn-block btn-outline-info" asp-controller="VehicleType" asp-action="ViewVehicleTypes">Back to list of types</a>
 </div>
