@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace AutoparkWeb.Models.Entity
 {
-    public class Vehicle//: IComparable<Vehicle>
+    public class Vehicle
     {
         public int Id { get; set; }
-        public int Type { get; set; }
+        public int TypeId { get; set; }
         public string ModelName { get; set; }
         public string RegistrationNumber { get; set; }
         public double Weight { get; set; }
@@ -23,18 +23,18 @@ namespace AutoparkWeb.Models.Entity
         public double Mileage { get; set; }
         public double TankVolume { get; set; }
         public string Color { get; set; }
-        public string Engine { get; set; }
+        public EngineNames Engine { get; set; }
 
-        public VehicleType VType { get; set; }
+        public VehicleType Type { get; set; }
 
         public double GetCalcTaxPerMonth()
         {
-            return (Weight * 0.0013) + (GetEngineByName(Enum.Parse<EngineNames>(Engine)).EngineTaxCoefficient * GetTypeById(Type).TaxCoefficient * 30) + 5;
+            return (Weight * 0.0013) + (GetEngineByName(Engine).EngineTaxCoefficient * Type.TaxCoefficient * 30) + 5;
         }
 
         public double GetMileageWithFullTank()
         {
-            return GetEngineByName(Enum.Parse<EngineNames>(Engine)).GetMaxKilometers(TankVolume);
+            return GetEngineByName(Engine).GetMaxKilometers(TankVolume);
         }
 
         private AbstractEngine GetEngineByName(EngineNames name)
@@ -50,14 +50,6 @@ namespace AutoparkWeb.Models.Entity
             }
 
             throw new ArgumentOutOfRangeException();
-        }
-
-        public VehicleType GetTypeById(int id)
-        {
-            string connStr = "Data Source=DESKTOP-I8MCTFK\\SQLEXPRESS;Initial Catalog=AutoPark;Integrated Security=True";
-            VehicleTypeRepository type = new VehicleTypeRepository(connStr);
-           
-            return type.Get(id);
         }
     }
 }

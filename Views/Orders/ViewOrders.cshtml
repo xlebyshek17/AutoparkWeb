@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<AutoparkWeb.Models.Entity.Orders>
-@inject AutoparkWeb.Models.Repositories.IRepository<Vehicle> vehicle
 @inject AutoparkWeb.Models.Repositories.IRepository<OrderItems> order
-@inject AutoparkWeb.Models.Repositories.IRepository<SpareParts> part
 @{
     ViewData["Title"] = "Orders";
 }
@@ -34,7 +32,7 @@
                         {
                             <tr>
                                 <td align="center">@item.Id</td>
-                                <td align="center">@vehicle.GetList().Where(v => v.Id == item.VehicleId).FirstOrDefault().ModelName</td>
+                                <td align="center">@item.Vehicle.ModelName</td>
                                 <td align="center"><a asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@item.Id" class="btn btn-outline-info">Information</a></td>
                             </tr>
                         }
@@ -65,9 +63,6 @@
                             <td align="center">
                                 <a asp-controller="OrderItems" asp-action="ViewOrderItems" asp-route-id="@o.Id">@o.Id</a>
                             </td>
-                            @*@{int id = Model.ToList().Where(ord => ord.Id == o.OrderId).FirstOrDefault().VehicleId;}
-                            <td align="center">@vehicle.GetList().Where(v => v.Id == id).FirstOrDefault().ModelName</td>
-                            <td align="center">@part.GetList().Where(p => p.Id == o.DetailId).FirstOrDefault().Name</td>*@
                             <td align="center">@o.OrderId</td>
                             <td align="center">@o.DetailId</td>
                             <td align="center">@o.DetailCount</td>

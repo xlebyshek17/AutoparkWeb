@@ -10,9 +10,9 @@
     <div>
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
-            <label asp-for="Type"></label>
+            <label asp-for="TypeId"></label>
             <div>
-                <select name="Type" asp-for="Type" class="form-control">
+                <select name="TypeId" asp-for="TypeId" class="form-control">
                     @foreach (var t in type.GetList())
                     {
                         <option value="@t.Id">@t.TypeName</option>
@@ -73,10 +73,12 @@
         <div class="form-group">
             <div>
                 <label asp-for="Engine"></label>
-                <select class="form-control" name="Engine" asp-for="Engine">
-                    <option>Gasoline</option>
-                    <option>Electrical</option>
-                    <option>Diesel</option>
+                <select name="Engine" class="form-control" asp-for="Engine">
+                    @{var engineList = Enum.GetValues(typeof(EngineNames));}
+                    @for (int i = 0; i < engineList.Length; i++)
+                    {
+                        <option>@engineList.GetValue(i)</option>
+                    }
                 </select>
             </div>
         </div>

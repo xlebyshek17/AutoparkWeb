@@ -28,9 +28,9 @@ namespace AutoparkWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrderItems(OrderItems order)
+        public IActionResult CreateOrderItems(OrderItems orders)
         {
-            repo.Create(order);
+            repo.Create(orders);
             return Redirect("~/Orders/ViewOrders");
         }
     }

@@ -10,7 +10,7 @@ create table VehicleTypes (
 
 create table Vehicles (
 	Id int not null identity(1,1) CONSTRAINT vehiclesID_pk primary key(Id),
-	Type int not null, 
+	TypeId int not null, 
 	ModelName nvarchar(50) not null,
 	RegistrationNumber nvarchar(50) not null,
 	Weight decimal(10,2) not null,
@@ -19,13 +19,13 @@ create table Vehicles (
 	TankVolume decimal(10,2) not null,
 	Color nvarchar(50) not null,
 	Engine nvarchar(50) not null,
-	FOREIGN KEY(Type) REFERENCES VehicleTypes(Id)
+	FOREIGN KEY(TypeId) REFERENCES VehicleTypes(Id) ON DELETE CASCADE
 );
 
 create table Orders (
 	Id int not null identity(1,1) CONSTRAINT ordersID_pk primary key(Id),
 	VehicleId int not null,
-	FOREIGN KEY(VehicleId) REFERENCES Vehicles(Id)
+	FOREIGN KEY(VehicleId) REFERENCES Vehicles(Id) ON DELETE CASCADE
 );
 
 create table SpareParts (
@@ -38,6 +38,6 @@ create table OrderItems (
 	OrderId int not null,
 	DetailId int not null,
 	DetailCount int not null,
-	FOREIGN KEY(OrderId) REFERENCES Orders(Id),
-	FOREIGN KEY(DetailId) REFERENCES SpareParts(Id)
+	FOREIGN KEY(OrderId) REFERENCES Orders(Id) ON DELETE CASCADE,
+	FOREIGN KEY(DetailId) REFERENCES SpareParts(Id) ON DELETE CASCADE
 );

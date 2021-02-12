@@ -31,9 +31,9 @@ namespace AutoparkWeb.Controllers
                  case SortState.MileageDesc:
                      return View(repos.GetList().OrderByDescending(v => v.Mileage));
                  case SortState.TypeNameAsc:
-                     return View(repos.GetList().OrderBy(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
+                     return View(repos.GetList().OrderBy(v => v.TypeId).ThenBy(v => v.Type.TypeName));
                  case SortState.TypeNameDesc:
-                     return View(repos.GetList().OrderByDescending(v => v.Type).ThenBy(v => v.GetTypeById(v.Id)));
+                     return View(repos.GetList().OrderByDescending(v => v.TypeId).ThenBy(v => v.Type.TypeName));
                  default:
                      return View(repos.GetList().OrderBy(v => v.Id));
             }

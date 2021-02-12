@@ -20,7 +20,7 @@ namespace AutoparkWeb.Models.Repositories
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
                 var sqlQuery = $"Insert into VehicleTypes (TypeName, TaxCoefficient) " +
-                    $"values (@TypeName, @TaxCoefficient)";
+                               $"values (@TypeName, @TaxCoefficient)";
                 db.Execute(sqlQuery, type);
             }
         }

@@ -20,9 +20,9 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                var sqlQuery = $"Insert into Vehicles(Type, ModelName, RegistrationNumber, Weight, ManufactureYear, Mileage, TankVolume, Color, Engine) " +
+                var sqlQuery = $"Insert into Vehicles(TypeId, ModelName, RegistrationNumber, Weight, ManufactureYear, Mileage, TankVolume, Color, Engine) " +
                                $"values(" +
-                               $"@Type, " +
+                               $"@TypeId, " +
                                $"@ModelName, " +
                                $"@RegistrationNumber, " +
                                $"@Weight, " +
@@ -49,15 +49,11 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Vehicle>($"Select * from Vehicles where Id = @id", new { id }).FirstOrDefault();
-            }
-        }
-
-        public List<Vehicle> GetList()
-        {
-            using (IDbConnection db = new SqlConnection(ConnectionString))
-            {
-                return db.Query<Vehicle>($"Select * from Vehicles").ToList();
+                var sqlquery = $"Select * from Vehicles v " +
+                               $"left join VehicleTypes vt " +
+                               $"on v.TypeId = vt.Id " +
+                               $"where v.Id = @id";
+                return db.Query<Vehicle, VehicleType, Vehicle>(sqlquery, (vehicle, type) => { vehicle.Type = type; return vehicle; }, new { id }).FirstOrDefault();
             }
         }
 
@@ -66,44 +62,28 @@ namespace AutoparkWeb.Models.Repositories
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
                 var sqlQuery = $"Update Vehicles set " +
-                    $"Type = @Type, " +
-                    $"ModelName = @ModelName, " +
-                    $"RegistrationNumber = @RegistrationNumber, " +
-                    $"Weight = @Weight, " +
-                    $"ManufactureYear = @ManufactureYear, " +
-                    $"Mileage = @Mileage, " +
-                    $"TankVolume = @TankVolume, " +
-                    $"Color = @Color, " +
-                    $"Engine = @Engine " +
-                    $"where Id = @Id";
+                               $"TypeId = @TypeId, " +
+                               $"ModelName = @ModelName, " +
+                               $"RegistrationNumber = @RegistrationNumber, " +
+                               $"Weight = @Weight, " +
+                               $"ManufactureYear = @ManufactureYear, " +
+                               $"Mileage = @Mileage, " +
+                               $"TankVolume = @TankVolume, " +
+                               $"Color = @Color, " +
+                               $"Engine = @Engine " +
+                               $"where Id = @Id";
                 db.Execute(sqlQuery, vehicle);
             }
         }
 
-        public List<Vehicle> OrderByModelName()
+        public List<Vehicle> GetList()
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Vehicle>($"Select * from Vehicles order by ModelName").ToList();
-            }
-        }
-
-        public List<Vehicle> OrderByMileage()
-        {
-            using (IDbConnection db = new SqlConnection(ConnectionString))
-            {
-                return db.Query<Vehicle>($"Select * from Vehicles order by Mileage").ToList();
-            }
-        }
-
-        public List<Vehicle> OrderByType()
-        {
-            using (IDbConnection db = new SqlConnection(ConnectionString))
-            {
-                return db.Query<Vehicle>($"Select * from Vehicles v " +
-                                         $"join VehicleTypes t " +
-                                         $"on v.Type = t.Id " +
-                                         $"order by t.TypeName").ToList();
+                var sqlquery = $"Select * from Vehicles v " +
+                               $"left join VehicleTypes vt " +
+                               $"on v.TypeId = vt.Id";
+                return db.Query<Vehicle, VehicleType, Vehicle>(sqlquery, (vehicle, type) => { vehicle.Type = type; return vehicle; }).ToList();
             }
         }
     }

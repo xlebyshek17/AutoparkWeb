@@ -39,7 +39,11 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Orders>($"Select * from Orders where Id = @id", new { id }).FirstOrDefault();
+                var sqlQuery = $"Select * from Orders o " +
+                               $"left join Vehicles v " +
+                               $"on o.VehicleId = v.Id " +
+                               $"where o.Id = @id";
+                return db.Query<Orders, Vehicle, Orders>(sqlQuery, (order, vehicle) => { order.Vehicle = vehicle; return order; }, new { id }).FirstOrDefault();
             }
         }
 
@@ -47,7 +51,11 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<Orders>($"Select * from Orders").ToList();
+                var sqlQuery = $"Select * from Orders o " +
+                               $"left join Vehicles v " +
+                               $"on o.VehicleId = v.Id";
+
+                return db.Query<Orders, Vehicle, Orders>(sqlQuery, (order, vehicle) => { order.Vehicle = vehicle; return order; }).ToList();
             }
         }
 

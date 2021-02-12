@@ -1,5 +1,4 @@
 ﻿@model AutoparkWeb.Models.Entity.OrderItems
-@inject AutoparkWeb.Models.Repositories.IRepository<Vehicle> vehicle
 @inject AutoparkWeb.Models.Repositories.IRepository<Orders> orders
 @inject AutoparkWeb.Models.Repositories.IRepository<SpareParts> parts
 @{
@@ -15,7 +14,7 @@
                 <select name="OrderId" class="form-control">
                     @foreach (var o in orders.GetList())
                     {
-                        <option value="@o.Id">@vehicle.GetList().Where(v => v.Id == o.VehicleId).FirstOrDefault().ModelName</option>
+                        <option value="@o.Id">@o.Id</option>
                     }
                 </select>
             </div>

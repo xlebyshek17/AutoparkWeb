@@ -42,7 +42,16 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<OrderItems>($"Select * from OrderItems where Id = @id", new { id }).FirstOrDefault();
+                var sqlQuery = $"Select * from SpareParts s " +
+                               $"join OrderItems ord " +
+                               $"on ord.DetailId = s.Id " +
+                               $"left join Orders o " +
+                               $"on ord.OrderId = o.Id " +
+                               $"left join Vehicles v " +
+                               $"on o.VehicleId = v.Id " +
+                               $"where ord.Id = @id";
+
+                return db.Query<SpareParts, OrderItems, Orders, Vehicle, OrderItems>(sqlQuery, (sparePart, orderItem, order, vehicle) => { orderItem.Order = order; orderItem.SparePart = sparePart; order.Vehicle = vehicle; return orderItem; }, new { id }).FirstOrDefault();
             }
         }
 
@@ -50,7 +59,13 @@ namespace AutoparkWeb.Models.Repositories
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
             {
-                return db.Query<OrderItems>($"Select * from OrderItems").ToList();
+                var sqlQuery = $"Select * from Orders o " +
+                               $"join OrderItems ord " +
+                               $"on ord.OrderId = o.Id " +
+                               $"left join SpareParts s " +
+                               $"on ord.DetailId = s.Id";
+                var list =  db.Query<Orders, OrderItems, SpareParts, OrderItems>(sqlQuery, (order, orderItem, sparePart) => { orderItem.Order = order; orderItem.SparePart = sparePart; return orderItem; }).ToList();
+                return list;
             }
         }
 

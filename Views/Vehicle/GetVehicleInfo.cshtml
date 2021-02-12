@@ -1,5 +1,4 @@
 ﻿@model AutoparkWeb.Models.Entity.Vehicle
-@inject AutoparkWeb.Models.Repositories.IRepository<VehicleType> type
 @{
     ViewData["Title"] = "Vehicle Details";
 }
@@ -29,7 +28,7 @@
         <tbody>
             <tr>
                 <td>@Model.Id</td>
-                <td>@type.GetList().Where(t => t.Id ==  Model.Type).FirstOrDefault().TypeName</td>
+                <td>@Model.Type.TypeName</td>
                 <td>@Model.ModelName</td>
                 <td>@Model.RegistrationNumber</td>
                 <td>@Model.Weight kg</td>
@@ -45,11 +44,6 @@
         </tbody>
     </table>
 </form>
-
-@*<div>
-    <p><a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@Model.Id">Update</a></p>
-    <p><a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@Model.Id">Delete</a></p>
-</div>*@
 
 <div>
     <a type="button" class="btn btn-outline-info" asp-controller="Vehicle" asp-action="ViewVehicles">Back to list of vehicles</a>
