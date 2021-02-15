@@ -1,36 +1,75 @@
-﻿@model AutoparkWeb.Models.Entity.OrderItems
+﻿@model IEnumerable<AutoparkWeb.Models.Entity.OrderItems>
+@inject AutoparkWeb.Models.Repositories.IRepository<Orders> orders
 @{
-    ViewData["Title"] = "Order Item details";
+    ViewData["Title"] = "Orders";
 }
 <h2>@ViewData["Title"]</h2>
-<div>
-    <p>-----------------------------------------------</p>
-</div>
-<div class="card text-center">
-    <div class="card-header">
-        <h4>Order item #@Model.Id</h4>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Vehicle" asp-action="ViewVehicles">Vehicles</a></li>
+        <li class="breadcrumb-item"><a asp-controller="VehicleType" asp-action="ViewVehicleTypes">Vehicle Types</a></li>
+        <li class="breadcrumb-item"><a asp-controller="SpareParts" asp-action="ViewSpareParts">Spare Parts</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Orders" asp-action="ViewOrders">Orders</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Order Items</li>
+    </ol>
+</nav>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">OrderItems</h5>
+                <table class="table table-bordered table-hover table-sm table align-middle">
+                    <caption>List of order items</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-center">Id</th>
+                            <th scope="col" class="text-center">OrderID</th>
+                            <th scope="col" class="text-center">Spare Part</th>
+                            <th scope="col" class="text-center">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var o in Model)
+                        {
+                            <tr>
+                                <td align="center">
+                                    <a asp-controller="OrderItems" asp-action="ViewDetailsOrderItems" asp-route-id="@o.Id">@o.Id</a>
+                                </td>
+                                <td align="center">@o.OrderId</td>
+                                <td align="center">@o.SparePart.Name</td>
+                                <td align="center">@o.DetailCount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-controller="OrderItems" asp-action="CreateOrderItems" class="btn btn-outline-info">Create Order Item</a>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <blockquote class="blockquote">
-            <dl class="row">
-
-                <dt class="col-sm-2">OrderId</dt>
-                <dd class="col-sm-10">@Model.OrderId</dd>
-
-                <dt class="col-sm-2">Vehicle</dt>
-                <dd class="col-sm-10">@Model.Order.Vehicle.ModelName</dd>
-
-                <dt class="col-sm-2">Spare part</dt>
-                <dd class="col-sm-10">@Model.SparePart.Name</dd>
-
-                <dt class="col-sm-2">Count</dt>
-                <dd class="col-sm-10">@Model.DetailCount</dd>
-            </dl>
-            <footer class="blockquote-footer">Detailed information about the ordering of the <cite title="Spare Parts">Spare Parts</cite> of the vehicle</footer>
-        </blockquote>
-    </div>
-    <div>
-        <p><a class="btn btn-outline-info" role="button" asp-controller="Orders" asp-action="ViewOrders">Back to list of orders</a></p>
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <table class="table table-bordered  table-sm table align-middle">
+                    <caption>List of orders</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-center">Id</th>
+                            <th scope="col" class="text-center">Vehicle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var o in orders.GetList())
+                        {
+                            <tr>
+                                <td align="center">@o.Id</td>
+                                <td align="center">@o.Vehicle.ModelName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

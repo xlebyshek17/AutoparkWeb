@@ -36,8 +36,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult CreateType(VehicleType type)
         {
-            repo.Create(type);
-            return RedirectToAction("ViewVehicleTypes");
+            if (ModelState.IsValid)
+            {
+                repo.Create(type);
+                return RedirectToAction("ViewVehicleTypes");
+            }
+            return View("CreateType");
         }
 
         public IActionResult EditType(int id)
@@ -49,8 +53,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult EditType(VehicleType type)
         {
-            repo.Update(type);
-            return RedirectToAction("ViewVehicleTypes");
+            if (ModelState.IsValid)
+            {
+                repo.Update(type);
+                return RedirectToAction("ViewVehicleTypes");
+            }
+            return View("EditType");
         }
 
         [HttpGet]

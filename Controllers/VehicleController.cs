@@ -47,8 +47,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult CreateVehicle(Vehicle vehicle)
         {
-            repos.Create(vehicle);
-            return RedirectToAction("ViewVehicles");
+            if (ModelState.IsValid)
+            {
+                repos.Create(vehicle);
+                return RedirectToAction("ViewVehicles");
+            }
+            return View("CreateVehicle");
         }
 
         public IActionResult GetVehicleInfo(int id)
@@ -67,8 +71,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult EditVehicle(Vehicle vehicle)
         {
-            repos.Update(vehicle);
-            return RedirectToAction("ViewVehicles");
+            if (ModelState.IsValid)
+            {
+                repos.Update(vehicle);
+                return RedirectToAction("ViewVehicles");
+            }
+            return View("EditVehicle");
         }
 
         [HttpGet]

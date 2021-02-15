@@ -30,8 +30,13 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult CreateOrder(Orders order)
         {
-            repo.Create(order);
-            return RedirectToAction("ViewOrders");
+            if (ModelState.IsValid)
+            {
+                repo.Create(order);
+                return RedirectToAction("ViewOrders");
+            }
+            return View("CreateOrder");
+            
         }
 
         public IActionResult GetOrderInfo(int id)

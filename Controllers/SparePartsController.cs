@@ -31,8 +31,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult CreateSparePart(SpareParts detail)
         {
-            repo.Create(detail);
-            return RedirectToAction("ViewSpareParts");
+            if (ModelState.IsValid)
+            {
+                repo.Create(detail);
+                return RedirectToAction("ViewSpareParts");
+            }
+            return View("CreateSparePart");
         }
 
         public IActionResult EditSparePart(int id)
@@ -44,8 +48,12 @@ namespace AutoparkWeb.Controllers
         [HttpPost]
         public IActionResult EditSparePart(SpareParts detail)
         {
-            repo.Update(detail);
-            return RedirectToAction("ViewSpareParts");
+            if (ModelState.IsValid)
+            {
+                repo.Update(detail);
+                return RedirectToAction("ViewSpareParts");
+            }
+            return View("EditSparePart");
         }
 
         [HttpGet]

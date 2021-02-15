@@ -9,22 +9,43 @@ using AutoparkWeb.Models.Entity.Engine;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoparkWeb.Models.Entity
 {
     public class Vehicle
     {
         public int Id { get; set; }
-        public int TypeId { get; set; }
-        public string ModelName { get; set; }
-        public string RegistrationNumber { get; set; }
-        public double Weight { get; set; }
-        public int ManufactureYear { get; set; }
-        public double Mileage { get; set; }
-        public double TankVolume { get; set; }
-        public string Color { get; set; }
-        public EngineNames Engine { get; set; }
 
+        [Required]
+        public int TypeId { get; set; }
+
+        [Required]
+        public string ModelName { get; set; }
+
+        [Required]
+        public string RegistrationNumber { get; set; }
+
+        [Range(0, 1000000, ErrorMessage = "Invalid weight, enter number > 0")]
+        [Required]
+        public double Weight { get; set; }
+
+        [Range(1885, 2021, ErrorMessage = "Invalid year, enter year > 1885 and < 2021")]
+        [Required]
+        public int ManufactureYear { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Invalid mileage, enter number > 0")]
+        [Required]
+        public double Mileage { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Invalid tank volume, enter number > 0")]
+        [Required]
+        public double TankVolume { get; set; }
+
+        [Required]
+        public string Color { get; set; }
+
+        public EngineNames Engine { get; set; }
         public VehicleType Type { get; set; }
 
         public double GetCalcTaxPerMonth()

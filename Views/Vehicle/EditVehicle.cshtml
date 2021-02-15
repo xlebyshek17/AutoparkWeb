@@ -10,7 +10,7 @@
     <div>
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
-            <label asp-for="TypeId"></label>
+            <label asp-for="TypeId">Type</label>
             <div>
                 <select name="TypeId" asp-for="TypeId" class="form-control">
                     @foreach (var t in type.GetList())
@@ -23,51 +23,44 @@
 
         <div class="form-group">
             <label asp-for="ModelName"></label>
-            <div>
-                <input type="text" asp-for="ModelName" class="form-control" />
-            </div>
+            <input type="text" asp-for="ModelName" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.ModelName)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="RegistrationNumber"></label>
-            <div>
-                <input type="text" asp-for="RegistrationNumber" class="form-control" />
-            </div>
+            <input type="text" asp-for="RegistrationNumber" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.RegistrationNumber)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="Weight"></label>
-            <div>
-                <input asp-for="Weight" class="form-control" />
-            </div>
+            <input asp-for="Weight" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.Weight)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="ManufactureYear"></label>
-            <div>
-                <input type="number" asp-for="ManufactureYear" class="form-control" />
-            </div>
+            <input type="number" asp-for="ManufactureYear" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.ManufactureYear)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="Mileage"></label>
-            <div>
-                <input asp-for="Mileage" class="form-control" />
-            </div>
+            <input asp-for="Mileage" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.Mileage)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="TankVolume"></label>
-            <div>
-                <input asp-for="TankVolume" class="form-control" />
-            </div>
+            <input asp-for="TankVolume" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.TankVolume)</p>
         </div>
 
         <div class="form-group">
             <label asp-for="Color"></label>
-            <div>
-                <input type="text" asp-for="Color" class="form-control" />
-            </div>
+            <input type="text" asp-for="Color" class="form-control" />
+            <p>@Html.ValidationMessageFor(m => m.Color)</p>
         </div>
 
         <div class="form-group">

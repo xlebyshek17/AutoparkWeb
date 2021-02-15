@@ -64,8 +64,7 @@ namespace AutoparkWeb.Models.Repositories
                                $"on ord.OrderId = o.Id " +
                                $"left join SpareParts s " +
                                $"on ord.DetailId = s.Id";
-                var list =  db.Query<Orders, OrderItems, SpareParts, OrderItems>(sqlQuery, (order, orderItem, sparePart) => { orderItem.Order = order; orderItem.SparePart = sparePart; return orderItem; }).ToList();
-                return list;
+                return db.Query<Orders, OrderItems, SpareParts, OrderItems>(sqlQuery, (order, orderItem, sparePart) => { orderItem.Order = order; orderItem.SparePart = sparePart; return orderItem; }).ToList();
             }
         }
 

@@ -6,40 +6,76 @@
 }
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="CreateOrderItems" asp-controller="OrderItems">
-    <div>
-        <div class="form-group">
-            <label asp-for="OrderId"></label>
-            <div>
-                <select name="OrderId" class="form-control">
-                    @foreach (var o in orders.GetList())
-                    {
-                        <option value="@o.Id">@o.Id</option>
-                    }
-                </select>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="CreateOrderItems" asp-controller="OrderItems">
+                    <div>
+                        <div class="form-group">
+                            <label asp-for="OrderId"></label>
+                            <div>
+                                <select name="OrderId" class="form-control">
+                                    @foreach (var o in orders.GetList())
+                                    {
+                                        <option value="@o.Id">@o.Id</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Spare part</label>
+                            <div>
+                                <select name="DetailId" class="form-control">
+                                    @foreach (var p in parts.GetList())
+                                    {
+                                        <option value="@p.Id">@p.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Count</label>
+                            <input type="number" asp-for="DetailCount" class="form-control" />
+                            <p>@Html.ValidationMessageFor(m => m.DetailCount)</p>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-outline-info" />
+                        </div>
+                    </div>
+                </form>
+
+                <div>
+                    <a class="btn btn-outline-info" role="button" asp-controller="OrderItems" asp-action="ViewOrderItems">Back to list of order items</a>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="DetailId"></label>
-            <div>
-                <select name="DetailId" class="form-control">
-                    @foreach (var p in parts.GetList())
-                    {
-                        <option value="@p.Id">@p.Name</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="DetailCount"></label>
-            <input type="number" asp-for="DetailCount" class="form-control" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-outline-info" />
         </div>
     </div>
-</form>
-
-<div>
-    <a class="btn btn-outline-info" role="button" asp-controller="Orders" asp-action="ViewOrders">Back to list of orders</a>
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Orders</h5>
+                <table class="table table-bordered table-sm table align-middle">
+                    <caption>List of orders</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-center">Id</th>
+                            <th scope="col" class="text-center">Vehicle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var o in orders.GetList())
+                        {
+                            <tr>
+                                <td align="center">@o.Id</td>
+                                <td align="center">@o.Vehicle.ModelName</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+
+

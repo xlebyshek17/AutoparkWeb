@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<AutoparkWeb.Models.Entity.Orders>
-@inject AutoparkWeb.Models.Repositories.IRepository<OrderItems> order
 @{
     ViewData["Title"] = "Orders";
 }
@@ -7,71 +6,37 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Vehicle" asp-action="ViewVehicles">Vehicles</a></li>
-        <li class="breadcrumb-item"><a asp-controller="VehicleType" asp-action="ViewVehicleTypes">VehicleTypes</a></li>
-        <li class="breadcrumb-item"><a asp-controller="SpareParts" asp-action="ViewSpareParts">SpareParts</a></li>
+        <li class="breadcrumb-item"><a asp-controller="VehicleType" asp-action="ViewVehicleTypes">Vehicle Types</a></li>
+        <li class="breadcrumb-item"><a asp-controller="SpareParts" asp-action="ViewSpareParts">Spare Parts</a></li>
         <li class="breadcrumb-item active" aria-current="page">Orders</li>
+        <li class="breadcrumb-item"><a asp-controller="OrderItems" asp-action="ViewOrderItems">Order Items</a></li>
     </ol>
 </nav>
-
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Orders</h5>
-                <table class="table table-bordered table-hover table-sm table align-middle">
-                    <caption>List of Orders</caption>
-                    <thead class="thead-dark">
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Orders</h5>
+            <table class="table table-bordered table-hover table-sm table align-middle">
+                <caption>List of Orders</caption>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="text-center">Id</th>
+                        <th scope="col" class="text-center">Vehicle</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th scope="col" class="text-center">Id</th>
-                            <th scope="col" class="text-center">Vehicle</th>
-                            <th></th>
+                            <td align="center">@item.Id</td>
+                            <td align="center">@item.Vehicle.ModelName</td>
+                            <td align="center"><a asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@item.Id" class="btn btn-outline-info">Information</a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td align="center">@item.Id</td>
-                                <td align="center">@item.Vehicle.ModelName</td>
-                                <td align="center"><a asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@item.Id" class="btn btn-outline-info">Information</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <a asp-controller="Orders" asp-action="CreateOrder" class="btn btn-outline-info">Create Order</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">OrderItems</h5>
-                <table class="table table-bordered table-hover table-sm table align-middle">
-                    <caption>List of order items</caption>
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" class="text-center">Id</th>
-                            <th scope="col" class="text-center">OrderID</th>
-                            <th scope="col" class="text-center">SparePartID</th>
-                            <th scope="col" class="text-center">Count</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var o in order.GetList())
-                        {
-                        <tr>
-                            <td align="center">
-                                <a asp-controller="OrderItems" asp-action="ViewOrderItems" asp-route-id="@o.Id">@o.Id</a>
-                            </td>
-                            <td align="center">@o.OrderId</td>
-                            <td align="center">@o.DetailId</td>
-                            <td align="center">@o.DetailCount</td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
-                <a asp-controller="OrderItems" asp-action="CreateOrderItems" class="btn btn-outline-info">Create OrderItems</a>
-            </div>
+                    }
+                </tbody>
+            </table>
+            <a asp-controller="Orders" asp-action="CreateOrder" class="btn btn-outline-info">Create Order</a>
         </div>
     </div>
 </div>

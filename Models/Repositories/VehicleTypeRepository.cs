@@ -34,11 +34,6 @@ namespace AutoparkWeb.Models.Repositories
             }
         }
 
-        /*public void Dispose()
-        {
-            throw new NotImplementedException();
-        }*/
-
         public VehicleType Get(int id)
         {
             using (IDbConnection db = new SqlConnection(ConnectionString))
