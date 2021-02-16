@@ -17,6 +17,7 @@ namespace AutoparkWeb.Models.Entity
     {
         public int Id { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Fill in the field Type")]
         [Required]
         public int TypeId { get; set; }
 
@@ -26,7 +27,7 @@ namespace AutoparkWeb.Models.Entity
         [Required]
         public string RegistrationNumber { get; set; }
 
-        [Range(0, 1000000, ErrorMessage = "Invalid weight, enter number > 0")]
+        [Range(0, double.MaxValue, ErrorMessage = "Invalid weight, enter number > 0")]
         [Required]
         public double Weight { get; set; }
 
